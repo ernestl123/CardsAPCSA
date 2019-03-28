@@ -56,6 +56,10 @@ public class ElevensBoard extends Board {
 	@Override
 	public boolean isLegal(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+            if (containsPairSum11(selectedCards) ||containsJQK(selectedCards)){
+                return true;
+            }
+            return false;
 	}
 
 	/**
@@ -69,8 +73,9 @@ public class ElevensBoard extends Board {
 	@Override
 	public boolean anotherPlayIsPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-	}
-
+            return (containsPairSum11(super.cardIndexes()) || containsJQK(super.cardIndexes()));
+        }
+        
 	/**
 	 * Check for an 11-pair in the selected cards.
 	 * @param selectedCards selects a subset of this board.  It is list
@@ -81,6 +86,15 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean containsPairSum11(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+            for (int i= 0; i < selectedCards.size(); i++){
+                for (int j= 0; j < selectedCards.size(); j++){
+                    if (i != j &&(super.cardAt(selectedCards.get(i)).pointValue() + super.cardAt(selectedCards.get(j)).pointValue() == 11)){
+                        return true;
+                    }
+                }
+            }
+            
+            return false;
 	}
 
 	/**
@@ -93,5 +107,21 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean containsJQK(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+            
+            boolean isJack = false;
+            boolean isQueen = false;
+            boolean isKing = false;
+            for (int i: selectedCards){
+                if (super.cardAt(i).rank().equals("jack")){
+                    isJack = true;
+                }
+                else if (super.cardAt(i).rank().equals("queen")){
+                    isQueen = true;
+                }
+                else if (super.cardAt(i).rank().equals("king")){
+                    isKing = true;
+                }
+            }
+            return (isJack && isQueen&& isKing);
 	}
 }

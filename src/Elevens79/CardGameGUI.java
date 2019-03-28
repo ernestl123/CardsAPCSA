@@ -114,7 +114,6 @@ public class CardGameGUI extends JFrame implements ActionListener {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		repaint();
 	}
-
 	/**
 	 * Run the game.
 	 */
